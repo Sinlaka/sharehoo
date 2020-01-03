@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>最详细准确的KETTLE调用存储过程和带有返回值的存储函数讲解--IT帮-资讯传播社区</title>
+	<meta name="Author" content="miki">
+	<meta name="Keywords" content="最详细准确的KETTLE调用存储过程和带有返回值的存储函数讲解">
+	<link href="bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet" />
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	<link href="css/style3.css" rel="stylesheet" type="text/css" />
+	<link href="shop/images/logo/favicon.ico" rel="SHORTCUT ICON" />
+	<!--2018.07.18  miki  ckeditor代码高亮	开头这里的样式为默认的风格，可以根据自己的喜好更换风格-->
+	<!--我的高亮效果是zenburn-->
+	<link rel="stylesheet" href="highlight/styles/zenburn.css">
+	<script src="highlight/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<link rel="stylesheet" href="shop/css/search_index.css">
+	<link rel="stylesheet" href="common/css/common.css">
+	<link rel="stylesheet" href="common/css/download_index.css">
+
+
+	<script>
+		(function () {
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+
+	<meta name="baidu-site-verification" content="qGEMPsi9L8" />
+	<script>
+		var _hmt = _hmt || [];
+		(function () {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?a17e70ae662c5f982f285d3f3d93f0ca";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+
+	<link href="css/style.css" rel="stylesheet" />
+	<script type="text/javascript">
+
+		function reP() {
+			document.getElementById('oImg').style.display = "block";
+		}
+
+		function logout() {
+			if (confirm("您确定要退出系统吗？")) {
+				window.location.href = "http://sharehoo.cn/user/logout";
+			}
+		}
+		function login() {
+			var curPage = window.location.href;
+			window.location.href = "login.jsp?prePage=" + curPage;
+		}
+		function checkUserLogin() {
+			if ('miki艾比利' == null || 'miki艾比利' == "") {
+				alert("您还未登陆！");
+			} else {
+				window.location.href = "http://sharehoo.cn/user/center";
+			}
+		}
+	</script>
+
+</head>
+
+<body>
+	<!-- 设置背景图片的尺寸2016.08.25 background:url('images/123.jpg') -->
+	<div style=" width: 1200px;height:auto;margin: 0 auto;" id="maincontentWrap">
+		<div style="width:100%; margin: 0 auto;">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="header">
+							<div class="header-con">
+								<a class="header-logo" href="#"><img src="common/images/logo/logo1.jpg"
+										style="width:40px;height:40px;">
+									<font style="color:white;"></font>
+								</a>
+								<!-- <a href="login">登录</a>| -->
+								<div class="header-user">
+									<font style="color:white;font-size:9pt;">
+										<a href="javascript:login()">登录&nbsp;</a>|<a href="register">&nbsp;注册&nbsp;</a>|
+										<a href="user/forget">忘记密码</a>
+									</font>
+								</div>
+							</div>
+						</div>
+						<div class="news-nav">
+							<div class="clearfix">
+								<div class="nav-bar">
+									<a href="home" class="current">首页</a>
+									<a href="http://sharehoo.cn/blog/miki" target="_blank">博客社区<img
+											src="images/icon/hot.gif"></a>
+									<a class=" " href="shop/index.htm" target="_blank">下载社区<img
+											src="images/icon/hot.gif"></a>
+									<a class=" " href="source/W3CSchool/www.w3school.com.cn/index.html"
+										target="_blank">W3C文档</a>
+									<a href="topic/section/3" target="_blank">社友圈<img src="images/icon/hot.gif"></a>
+									<a class=" " href="h5" target="_blank">H5小游戏</a>
+									<a href="secret" target="_blank">秘密墙<img src="images/icon/hot.gif"></a>
+									<a href="softsection/list" target="_blank">软件下载</a>
+									<a class=" " href="http://sharehoo.cn/154339002942889.html" target="blank">社区规则</a>
+								</div>
+								<div class="search-download" style="display:none;">
+									<form action="" method="post" onsubmit="return check_up(this);"
+										name="download_search">
+										<input style="font-size:9pt;" type="text" placeholder="搜索资源..." value=""
+											id="tagff" name="keywords" />
+										<a href="javascript:check_up(download_search);void(0);"
+											class="download-search-bth"></a>
+									</form>
+
+								</div>
+							</div>
+						</div>
+						<div class="home_page_wrap">
+							<div class="home_banner">
+								<!--黑色背景块上面加入logo块  -->
+								<div style="margin: 0 auto;height:150px;color:white;border:1px solid white;">
+									<div style="width:20%;display: inline-block; padding-left: 15px;">
+										<p>-发帖者：</p>
+										<div>
+											<img src="common/images/write.png"><a href="#1"
+												style="color: beige;">参与讨论....</a>
+										</div>
+									</div>
+									<p align="center" style="width:70%; line-height: 150px; display: inline-block;font-size: 22px;">
+										<strong>欢迎讨论：最详细准确的KETTLE调用存储过程和带有返回值的存储函数讲解！</strong></p>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+					<div class="col-md-2" style="height:100%;">
+						<div style="width: 100%;margin: 0 auto;background-color:#FFFFFF;padding: 5px 0 0 5px;">
+							<p style="text-align: center; padding:5px 5px;font-size: 14px;font-weight:600">
+								miki艾比利
+							</p>
+							<div style="width: 80px;height:80px;margin:0 auto;">
+								<img alt="" src="images/user/20170504100736.jpeg"
+									style="width: 80px;height:80px;border-radius:50%;">
+								<a href="#" style="font-size: 8pt;color: black;"></a>
+							</div>
+							<div>
+								<a href="#" style="font-size: 8pt;color: black;"><strong>性别：男</strong></a><br>
+								<a href="#"
+									style="font-size: 8pt;color: black;"><strong>邮箱：1329289117@qq.com</strong></a><br>
+								<font style="font-size: 8pt;color: red;">管理员</font>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-10" style="height:100%;">
+						<table id="maincontentPanel" style='width: 100%;background:#FFFFFF;'>
+							<tr style="height: 60px;">
+								<a name="top"></a>
+								<td style="background-color:#EFF4FB;">
+									【主题】:<strong>
+										<font color="#555;">最详细准确的KETTLE调用存储过程和带有返回值的存储函数讲解</font>
+									</strong>
+								</td>
+
+							</tr>
+
+							<tr>
+								<td>
+									<div style="height:auto; width: 90%; margin: 0 auto;padding:6px;font-size:9pt;"
+										class="show_e">
+										<h2>1.前言</h2>
+
+										<p>最近用到了kettle的存储过程，看到网上写的一些说明文档，大都说的含糊其辞，不太准确，这里分析了一下kettle的源码，对其用法大致的讲解一遍。这里大致看一下kettle的组件界面，
+										</p>
+
+										<p><img alt="" class="has" data-widget="image"
+												src="http://sharehoo.cn/images/topicImage/202001/20200102225839607.png"
+												style="height:400px; width:418px" /></p>
+
+										<p>大致基本上都能看懂，但是大多数都被kettle的翻译误人子弟，组件是调用存储过程，但是存储过程中也存在一种特殊的类型，叫做存储函数。而且kettle也是支持调用存储函数的，下面讲解一下存储过程和存储函数的大致区别：
+										</p>
+
+										<h2>2.存储过程和存储函数介绍</h2>
+
+										<p>语法区别：关键字不一样，存储函数比存储过程多了两个return。</p>
+
+										<p>本质区别：存储函数有返回值，可以自定义函数；而存储过程没有返回值。</p>
+
+										<p>如果存储过程想实现有返回值的业务，我们就必须使用out类型的参数。
+											<strong>即便是存储过程使用了out</strong><strong>类型的参数，其本质也不是真的有了返回值，而是在存储过程内部给out</strong><strong>类型参数赋值</strong>，在执行完毕后，我们直接拿到输出类型参数的值。
+										</p>
+
+										<h2>3.kettle调用存储过程</h2>
+
+										<p>由于存储过程本质上不存在返回值，所以 &rdquo;返回值类型&ldquo; 选项一定要为空，否则执行会报错，找不到该存储过程。</p>
+
+										<p><img alt="" class="has" data-widget="image"
+												src="http://sharehoo.cn/images/topicImage/202001/20200102225938359.png"
+												style="height:450px; width:691px" /></p>
+
+										<h3>*******简单的数据叠加求和存储过程&nbsp;</h3>
+
+										<p>&nbsp;<img alt="" class="has" data-widget="image"
+												src="http://sharehoo.cn/images/topicImage/202001/20200102230057643.png"
+												style="height:325px; width:691px" /></p>
+
+										<h2>4.调用存储函数&nbsp;</h2>
+
+										<p>由于存储是含有返回值的，所以要加上返回值字段名称。</p>
+
+										<p><img alt="" class="has" data-widget="image"
+												src="http://sharehoo.cn/images/topicImage/202001/20200102230319153.png"
+												style="height:436px; width:691px" /></p>
+
+										<h2>5.总结&nbsp;</h2>
+
+										<p>关于存储过程和存储函数的sql脚本：</p>
+
+										<pre>
+<code class="language-sql">存储过程1：带返回值：
+1 drop procedure if exists proc_addNum;
+2 create procedure proc_addNum (in x int,in y int,out sum int)
+3 BEGIN
+4 SET sum= x + y;
+5 end
+</code></pre>
+
+										<pre>
+<code class="language-sql">存储函数1：带返回值：
+delimiter $$
+create function getCdkNumById(tid int) returns INT
+DETERMINISTIC
+begin
+   declare dnum INT;
+   set dnum=(select douNum from t_cdk where id=tid);
+   return (dnum);
+end$$
+delimiter;
+</code></pre>
+
+										<p>&nbsp;</p>
+
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td
+									style="text-align: right;height: 40px;color:gray;font-size:9pt;background-color:#EFF4FB;">
+									&nbsp;<a href="http://sharehoo.cn/topic/detail/439"
+										style="font-size: 9pt;margin-right:;color:gray;">发表评论</a>
+									&nbsp;&nbsp;&nbsp;<a style="text-align: right;color:gray;font-size:9pt;">
+										发表时间:『2020-01-02 23:09:07』</a>
+								</td>
+							</tr>
+
+						</table>
+					</div>
+				</div>
+
+				<!-- 回复列表2016.08.24 -->
+			</div>
+
+			<div class="pagination alternate" align="center">
+				<a name="foot"></a>
+				<div class="more">
+					<a href="http://sharehoo.cn/topic/detail/439">↓↓↓点击加载更多回复↓↓↓</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<!-- 返回顶部 代码        2017.03.02               -->
+
+
+	<script type="text/javascript">
+
+		$(function () {
+
+			// 页面浮动面板
+			$("#floatPanel > .ctrolPanel > a.arrow").eq(0).click(function () { $("html,body").animate({ scrollTop: 0 }, 800); return false; });
+			$("#floatPanel > .ctrolPanel > a.arrow").eq(1).click(function () { $("html,body").animate({ scrollTop: $(document).height() }, 800); return false; });
+
+			var objPopPanel = $("#floatPanel > .popPanel");
+			var w = objPopPanel.outerWidth();
+			$("#floatPanel > .ctrolPanel > a.qrcode").bind({
+				mouseover: function () {
+					objPopPanel.css("width", "0px").show();
+					objPopPanel.animate({ "width": w + "px" }, 300); return false;
+				},
+				mouseout: function () {
+					objPopPanel.animate({ "width": "0px" }, 300); return false;
+					objPopPanel.css("width", w + "px");
+				}
+			});
+
+		});
+	</script>
+	<br>
+	<div style="text-align:center;clear:both"><br>
+	</div>
+
+	<div style="text-align:center;margin:0px 0">
+		<!--浮动面板-->
+		<div id="floatPanel">
+			<div class="ctrolPanel">
+				<a class="arrow" href="#top"><span>顶部</span></a>
+
+				<a class="contact" href="http://www.baidu.com/" target="_blank"><span></span></a>
+				<a class="qrcode" href="#"><span>微信二维码</span></a>
+				<a class="arrow" href="#foot"><span>底部</span></a></div>
+
+			<div class="popPanel">
+				<div class="popPanel-inner">
+					<div class="qrcodePanel">
+						<img src="images/miki.png" /><span>扫描二维码关注网站最新动态</span></div>
+					<div class="arrowPanel">
+						<div class="arrow01">
+						</div>
+						<div class="arrow02">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- 回复界面不需要底部管理员登录选项footer.jsp       2016.09.27-->
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			// 在这里写你的代码...
+			$("#maincontentWrap").height($("#maincontentPanel").height() + 200);
+		});
+
+	</script>
+</body>
+
+</html>
